@@ -1,0 +1,32 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox",
+      "guest_os_type": "Ubuntu_64",
+      "iso_url": "http://releases.ubuntu.com/raring/ubuntu-13.04-server-i386.iso",
+      "iso_checksum": "73d595b804149fca9547ed94db8ff44f",
+      "iso_checksum_type": "md5",
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us interface=eth0 <wait>",
+        "hostname={{ .Name }} <wait>",
+        "fb=false debconf/frontend=noninteractive <wait>",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false <wait>",
+        "initrd=/install/initrd.gz -- <enter><wait>"
+      ],
+      "boot_wait": "4s",
+      "http_directory": "http",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "10000s",
+
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"],
+        ["modifyvm", "{{.Name}}", "--nic2", "hostonly"],
+        ["modifyvm", "{{.Name}}", "--hostonlyadapter2", "vboxnet2"]
+      ]
+    }
+  ]
+}
