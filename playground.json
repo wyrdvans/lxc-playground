@@ -6,6 +6,7 @@
       "iso_url": "http://releases.ubuntu.com/raring/ubuntu-13.04-server-i386.iso",
       "iso_checksum": "73d595b804149fca9547ed94db8ff44f",
       "iso_checksum_type": "md5",
+      "format": "ovf",
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
@@ -27,6 +28,13 @@
         ["modifyvm", "{{.Name}}", "--nic2", "hostonly"],
         ["modifyvm", "{{.Name}}", "--hostonlyadapter2", "vboxnet2"]
       ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "lxc_playground.box",
+      "keep_input_artifact": true
     }
   ]
 }
