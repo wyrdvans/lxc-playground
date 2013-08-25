@@ -27,7 +27,8 @@
         ["modifyvm", "{{.Name}}", "--cpus", "2"],
         ["modifyvm", "{{.Name}}", "--nic2", "hostonly"],
         ["modifyvm", "{{.Name}}", "--hostonlyadapter2", "vboxnet2"]
-      ]
+      ],
+      "vm_name": "lxc-playground"
     }
   ],
   "post-processors": [
