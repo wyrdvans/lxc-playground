@@ -1,4 +1,12 @@
 {
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/base.sh"
+      ]
+    }
+  ],
   "builders": [
     {
       "type": "virtualbox",
